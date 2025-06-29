@@ -1,3 +1,11 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import Cliente
 
-# Register your models here.
+class ClienteAdmin(UserAdmin):
+    model = Cliente
+    fieldsets = UserAdmin.fieldsets + (
+        (None, {'fields': ('telefone', 'endereco')}),
+    )
+
+admin.site.register(Cliente, ClienteAdmin)
