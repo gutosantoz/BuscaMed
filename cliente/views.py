@@ -1,11 +1,15 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
-def ver_cliente(request):
-    return HttpResponse('Ola Cliente, tudo bem??')
+def cadastrar_cliente(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')  # Redireciona para a página inicial
+    else:
+        form = UserCreationForm()
 
-def criar_cliente(request):
-    return render(request, 'criar_cliente.html')
-
-def login(request):
-    return render(request, 'login.html')
+    return render(request, 'cadastrar_cliente.html', {'form': form})
