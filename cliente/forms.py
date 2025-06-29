@@ -5,4 +5,11 @@ from .models import Cliente
 class ClienteCreationForm(UserCreationForm):
     class Meta:
         model = Cliente
-        fields = ('username', 'email', 'telefone', 'endereco', 'password1', 'password2')
+        fields = (
+            'username',     # nome de usuário para login
+            'email',        # e-mail (já presente em AbstractUser)
+            'telefone',     # campo personalizado
+            'endereco',     # campo personalizado
+            'password1',
+            'password2',
+        )
